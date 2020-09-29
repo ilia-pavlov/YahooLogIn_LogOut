@@ -1,0 +1,5 @@
+public class HideInfo {
+    public static final String EMAIL ="iliapavlov538@yahoo.com";
+
+    public static final String  PASSWORD = "45321";
+}
