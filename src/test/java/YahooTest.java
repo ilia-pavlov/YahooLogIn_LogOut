@@ -104,7 +104,7 @@ public class YahooLogInOut {
             typeMassage(massage);
             clickSend();
             openSent();
-            verifySentMassage();
+            verifySentMassage();  // how to verify resul that massage was send?
 
 
 
