@@ -2,8 +2,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.*;
-import sun.security.util.Password;
 
 public class YahooLogInOut {
 
@@ -11,15 +11,16 @@ public class YahooLogInOut {
 
     @BeforeSuite
     private void setup() {
-        System.setProperty("webdriver.gecko.driver", "src/test/resourse/webdriver/win 64/geckodriver");
+        System.setProperty("webdriver.gecko.driver", "src/test/resourse/webdriver/MacOS/geckodriver");
         driver = new FirefoxDriver();
         driver.manage().window().maximize();
     }
 
-    @AfterSuite
-    public void afterSuit() {
+    @AfterTest
+    public void afterTest() {
         driver.close();
     }
+
 
     //1. open main page
     //2. click singIn
@@ -94,48 +95,46 @@ public class YahooLogInOut {
         openSent();
         verifySentMassage();
 
+        Assert.assertEquals(verifySentMassage(), HideInfo.EMAIL);
 
     }
 
-    private void verifySentMassage() {
-        String element = HideInfo.RECIPIENT;
-        WebElement page = driver.findElement(By.linkText(element));
-        page.click();
+    private String verifySentMassage() {
+        WebElement message = driver.findElement(By.linkText(HideInfo.EMAIL));
+        return message.getText();
+
+
     }
 
     private void openSent() {
-        String element = "/html/body/div[1]/div/div[1]/div/div[2]/div/div[1]/nav/div/div[3]/div[1]/ul/li[5]/div/a/span[1]";
-        WebElement button = driver.findElement(By.xpath(element));
+        WebElement button = driver.findElement(By.linkText("Sent"));
         button.click();
     }
 
     private void clickSend() {
-        String xpath = "/html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div[2]/div/div[2]/div[2]/div/button";
-        WebElement button = driver.findElement(By.xpath(xpath));
+        String id = "compose-send-button";
+        WebElement button = driver.findElement(By.id(id));
         button.click();
     }
 
     private void typeMassage(String massage) {
-        String xpath = "/html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div[2]/div/div[2]/div[1]/div/div[2]/div/div[1]";
-        WebElement mainTextField = driver.findElement(By.xpath(xpath));
+        String linkTest = "Message body";
+        WebElement mainTextField = driver.findElement(By.linkText(linkTest));
         mainTextField.sendKeys(massage);
     }
 
     private void typeSubject(String subject) {
-        String xpath = "/html/body/div[1]/div/div[1]/div/div[2]/div/div[2]/div[1]/div[2]/div/div[1]/div[3]/div/div/input";
-        WebElement textField = driver.findElement(By.xpath(xpath));
+        WebElement textField = driver.findElement(By.linkText("Subject"));
         textField.sendKeys(subject);
     }
 
     private void typeToWhom(String recipient) {
-        String xpath = "//*[@id=\"message-to-field\"]";
-        WebElement textField = driver.findElement(By.xpath(xpath));
+        WebElement textField = driver.findElement(By.id(" //input[@id='message-to-field']"));
         textField.sendKeys(recipient);
     }
 
     private void clickCompose() {
-        String element = "a.e_dRA";
-        WebElement button = driver.findElement(By.cssSelector(element));
+        WebElement button = driver.findElement(By.linkText("Compose"));
         button.click();
     }
 
