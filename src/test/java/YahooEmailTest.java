@@ -2,7 +2,7 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class YahooEmailTest extends BaseTest {
+public class YahooEmailTest extends BaseClass {
 
 
     //1. in main page click Mail

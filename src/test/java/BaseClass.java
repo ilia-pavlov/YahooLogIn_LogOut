@@ -3,31 +3,35 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
-public class BaseTest {
-    public WebDriver driver; //  how to fix = driver is null?
-                            //it's not allow me write more IF for Windows settings.
+import java.util.concurrent.TimeUnit;
+
+public class BaseClass {
+      WebDriver driver;
 
 
     @BeforeSuite
-    public void setup(String browserType) {
-        String osName = System.getProperty("os.name");
+    @Parameters("browser")
+    public void setup(@Optional String browser) throws Exception {
+        // String osName = System.getProperty("os.name");
 
-        if (osName.equalsIgnoreCase("Mac OS X"))
+        if (browser.equalsIgnoreCase("firefox")) {
             System.setProperty("webdriver.gecko.driver", "src/test/resourse/webdriver/macOS/gecko/geckodriver");
             driver = new FirefoxDriver();
 
-        if (browserType.equals("Chrome"))
+        } else if (browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.gecko.driver", "src/test/resourse/webdriver/macOS/chrome/chromedriver85");
             driver = new ChromeDriver();
 
+        } else {
+            throw new Exception("Browser is not correct");
+
+        }
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
-
-    //1. open main page
+        //1. open main page
     //2. click singIn
     //3. type valid email
     //4. click next
@@ -74,6 +78,7 @@ public class BaseTest {
 
 
     }
+
     @AfterSuite
     public void afterSuite() {
         driver.quit();
