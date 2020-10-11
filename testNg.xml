@@ -3,10 +3,10 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SuiteFromXML" verbose="1">
 
-    <test name="FirefoxTest">
-        <parameter name="browser" value="firefox"/>
+    <test name="Search in Chrome">
+        <parameter name="browser" value="Chrome"/>
         <classes>
-            <class name="BaseClass">
+            <class name="YahooEmailBox">
                 <methods>
                     <include name="sendEmailToOneUser"/>
                 </methods>
@@ -14,17 +14,15 @@
         </classes>
     </test>
 
-    <test name="ChromeTest">
-        <parameter name="browser" value="chrome"/>
+    <test name="Search in FF">
+        <parameter name="browser" value="FF"/>
         <classes>
-            <class name="BaseClass">
+            <class name="YahooEmailBox">
                 <methods>
                     <include name="sendEmailToOneUser"/>
                 </methods>
             </class>
         </classes>
     </test>
-
-
 
 </suite>

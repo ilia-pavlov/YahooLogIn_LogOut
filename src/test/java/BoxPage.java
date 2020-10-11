@@ -6,7 +6,7 @@ public class BoxPage {
     private final WebDriver driver;
 
     public BoxPage(WebDriver driver) {
-        this.driver = driver; 
+        this.driver = driver;
     }
 
     public void clickCompose() {
@@ -41,7 +41,7 @@ public class BoxPage {
     }
 
     public String verifySentMassage() {
-        WebElement message = driver.findElement(By.linkText(HideInfo.RECIPIENT ));
+        WebElement message = driver.findElement(By.linkText(HideInfo.RECIPIENT));
         return message.getText();
     }
 }

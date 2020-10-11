@@ -5,7 +5,7 @@ public class MainPage {
     private final WebDriver driver;
 
     public MainPage(WebDriver driver) {
-        this.driver=driver;
+        this.driver = driver;
     }
 
     public void clickMail() {
