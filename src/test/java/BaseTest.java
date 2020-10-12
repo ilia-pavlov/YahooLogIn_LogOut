@@ -1,3 +1,4 @@
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,18 +8,31 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
+
 public class BaseTest {
+
+    private static Logger logger = getLogger(Services.class.getName());
 
     public WebDriver driver;
 
     @Parameters({"browser"})
+
     @BeforeTest
     public void setup(String browserType) {
         String osName = System.getProperty("os.name");
 
+
         if (osName.equalsIgnoreCase("Mac OS X")) {
             System.setProperty("webdriver.gecko.driver", "src/test/resourse/webdriver/macOS/gecko/geckodriver");
 
+        logger.info("OS was chosen");
+        logger.debug("Debug Message OS in progress");
+        logger.error("Error message OS was not chosen");
+        logger.trace("Trace message OS is NULL ");
+        logger.warn("Warn message OS is in warn");
+        logger.fatal("FATAL message program was crashed! ");
 
             if (browserType.equals("Chrome")) {
                 System.setProperty("webdriver.chrome.driver", "src/test/resourse/webdriver/macOS/chrome/chromedriver86");
@@ -34,17 +48,22 @@ public class BaseTest {
             driver = new FirefoxDriver();
         }
 
+       logger.debug("both drivers was launched");
 
         String email = HideInfo.EMAIL;
         String password = HideInfo.PASSWORD;
 
 
         openMainPage();
+        //log.info("Main Page was open");
         singInFiled();
         typeEmail(email);
+       // log.info ("Email was typed");
         clickButtonNext1();
         typePassword(password);
+       // log.info("Password was typed");
         clickButtonNext1();
+       // log.info ("login in was succeed, User in Email Box");
     }
 
     private void typePassword(String password) {
@@ -77,6 +96,9 @@ public class BaseTest {
     @AfterSuite
     public void afterSuite() {
         driver.quit();
+    }
+
+    static class Services {
     }
 }
 
