@@ -1,5 +1,8 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BoxPage;
+import pages.MainPage;
+import tests.BaseTest;
 
 public class YahooEmailBox extends BaseTest {
 
