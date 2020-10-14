@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" verbose="2">
+<suite name="SuiteFromXML" verbose="1">
 
     <test name="Search in Chrome">
         <parameter name="browser" value="Chrome"/>
+        <classes>
+            <class name="YahooEmailBox">
+                <methods>
+                    <include name="sendEmailToOneUser"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Search in FF">
+        <parameter name="browser" value="FF"/>
         <classes>
             <class name="YahooEmailBox">
                 <methods>
