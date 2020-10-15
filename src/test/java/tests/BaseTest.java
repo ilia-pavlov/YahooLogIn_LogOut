@@ -61,12 +61,12 @@ public class BaseTest {
     }
 
     private void clickButtonNext1() {
-        driver.findElement(By.id("login-signin")).click();
+        driver.findElement(By.xpath("//input[@id='login-signin']")).click();
 
     }
 
     private void typeEmail(String email) {
-        driver.findElement(By.id("login-username")).sendKeys(email);
+        driver.findElement(By.xpath("//input[@id='login-username']")).click();
 
     }
 
